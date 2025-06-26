@@ -3,57 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mockups Gallery</title>
+  <title>Design Mockups Gallery</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .tab-active {
+      @apply border-b-2 border-black text-black font-semibold;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col items-center justify-start p-8">
+<body class="bg-white text-gray-800 min-h-screen p-6">
 
-  <h1 class="text-4xl font-bold mb-6">Design Mockups</h1>
+  <!-- Header -->
+  <header class="text-center mb-8">
+    <h1 class="text-4xl font-bold tracking-tight">Mockups Gallery</h1>
+    <p class="text-gray-500 mt-2">Explore visual concepts and exhibit designs</p>
+  </header>
 
   <!-- Tabs -->
-  <div class="mb-6">
-    <nav class="flex space-x-4">
-      <button class="tab-btn bg-white px-4 py-2 rounded shadow font-semibold hover:bg-gray-200" data-tab="posters">Posters</button>
-      <button class="tab-btn bg-white px-4 py-2 rounded shadow font-semibold hover:bg-gray-200" data-tab="trashcans">Trashcans</button>
-      <button class="tab-btn bg-white px-4 py-2 rounded shadow font-semibold hover:bg-gray-200" data-tab="comics">Comics</button>
-    </nav>
+  <div class="flex justify-center mb-6 border-b border-gray-300">
+    <button class="tab-btn px-4 py-2 text-gray-500 hover:text-black transition" data-tab="posters">Posters</button>
+    <button class="tab-btn px-4 py-2 text-gray-500 hover:text-black transition" data-tab="trashcans">Trashcans</button>
+    <button class="tab-btn px-4 py-2 text-gray-500 hover:text-black transition" data-tab="comics">Comics</button>
+    <button class="tab-btn px-4 py-2 text-gray-500 hover:text-black transition" data-tab="virtual">Virtual Exhibit</button>
   </div>
 
-  <!-- Content Areas -->
-  <div id="posters" class="tab-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    <img src="https://via.placeholder.com/300x400?text=Poster+1" alt="Poster 1" class="rounded shadow" />
-    <img src="https://via.placeholder.com/300x400?text=Poster+2" alt="Poster 2" class="rounded shadow" />
-    <img src="https://via.placeholder.com/300x400?text=Poster+3" alt="Poster 3" class="rounded shadow" />
-  </div>
+  <!-- Tab Content Sections -->
+  <section id="posters" class="tab-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <img src="https://via.placeholder.com/600x800?text=Poster+1" alt="Poster 1" class="rounded-lg shadow hover:shadow-xl transition" />
+    <img src="https://via.placeholder.com/600x800?text=Poster+2" alt="Poster 2" class="rounded-lg shadow hover:shadow-xl transition" />
+    <img src="https://via.placeholder.com/600x800?text=Poster+3" alt="Poster 3" class="rounded-lg shadow hover:shadow-xl transition" />
+  </section>
 
-  <div id="trashcans" class="tab-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    <img src="https://via.placeholder.com/300x400?text=Trashcan+1" alt="Trashcan 1" class="rounded shadow" />
-    <img src="https://via.placeholder.com/300x400?text=Trashcan+2" alt="Trashcan 2" class="rounded shadow" />
-  </div>
+  <section id="trashcans" class="tab-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <img src="https://via.placeholder.com/600x800?text=Trashcan+1" alt="Trashcan 1" class="rounded-lg shadow hover:shadow-xl transition" />
+    <img src="https://via.placeholder.com/600x800?text=Trashcan+2" alt="Trashcan 2" class="rounded-lg shadow hover:shadow-xl transition" />
+  </section>
 
-  <div id="comics" class="tab-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    <img src="https://via.placeholder.com/300x400?text=Comic+1" alt="Comic 1" class="rounded shadow" />
-    <img src="https://via.placeholder.com/300x400?text=Comic+2" alt="Comic 2" class="rounded shadow" />
-    <img src="https://via.placeholder.com/300x400?text=Comic+3" alt="Comic 3" class="rounded shadow" />
-  </div>
+  <section id="comics" class="tab-content hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <img src="https://via.placeholder.com/600x800?text=Comic+1" alt="Comic 1" class="rounded-lg shadow hover:shadow-xl transition" />
+    <img src="https://via.placeholder.com/600x800?text=Comic+2" alt="Comic 2" class="rounded-lg shadow hover:shadow-xl transition" />
+    <img src="https://via.placeholder.com/600x800?text=Comic+3" alt="Comic 3" class="rounded-lg shadow hover:shadow-xl transition" />
+  </section>
 
+  <section id="virtual" class="tab-content hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <img src="https://via.placeholder.com/800x500?text=Virtual+Exhibit+1" alt="Virtual Exhibit 1" class="rounded-lg shadow hover:shadow-xl transition" />
+    <img src="https://via.placeholder.com/800x500?text=Virtual+Exhibit+2" alt="Virtual Exhibit 2" class="rounded-lg shadow hover:shadow-xl transition" />
+  </section>
+
+  <!-- Script for Tabs -->
   <script>
     const tabs = document.querySelectorAll(".tab-btn");
     const contents = document.querySelectorAll(".tab-content");
 
     tabs.forEach(tab => {
       tab.addEventListener("click", () => {
-        const target = tab.dataset.tab;
+        // Remove active styling from all tabs
+        tabs.forEach(t => t.classList.remove("tab-active"));
+        // Add active styling to clicked tab
+        tab.classList.add("tab-active");
 
+        // Hide all tab contents
         contents.forEach(c => c.classList.add("hidden"));
-        document.getElementById(target).classList.remove("hidden");
 
-        tabs.forEach(t => t.classList.remove("bg-blue-100"));
-        tab.classList.add("bg-blue-100");
+        // Show the correct tab
+        document.getElementById(tab.dataset.tab).classList.remove("hidden");
       });
     });
 
-    // Optional: Set default tab
+    // Set default tab
     tabs[0].click();
   </script>
 
